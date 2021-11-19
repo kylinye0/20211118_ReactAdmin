@@ -3,15 +3,12 @@ import { Form, Input, Button } from 'antd';
 import {UserOutlined,LockOutlined} from '@ant-design/icons'
 import './login.less';
 import logo from './images/logo.png';
-import useForm from "antd/lib/form/hooks/useForm";
 export default class Login extends Component{
     render() {
         const onFinish = (values: any) => {
             console.log('Received values of form: ', values);
         };
-        const onSubmit=(event)=>{
-            alert(event);
-        }
+
         return (<div className="login">
             <header className="login-header">
                 <img src={logo} alt="logo"></img>
@@ -23,17 +20,25 @@ export default class Login extends Component{
                     name="normal_login"
                     className="login-form"
                     onFinish={onFinish}
-                    onSubmit={onSubmit}
+                    initialValues={{username:'admin'}}
                 >
                     <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Please input your Username!' }]}
+                        rules={[{ required: true, message: '用户名必须输入!' },
+                            {min:4,message:'最少4个字符!'},
+                            {max:12,message:'最多12个字符!'},
+                            {pattern:/^[a-zA-Z0-9_]+$/,message:"用户名必须是英文、数字或下划线组成"},
+                            {whitespace:true,message:"不能只有空格"}]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                     </Form.Item>
                     <Form.Item
                         name="password"
-                        rules={[{ required: true, message: 'Please input your Password!' }]}
+                        rules={[{ required: true, message: '密码必须输入!' },
+                            {min:4,message:'最少4个字符!'},
+                            {max:12,message:'最多12个字符!'},
+                        {pattern:/^[a-zA-Z0-9_]+$/,message:"用户名必须是英文、数字或下划线组成"},
+                            {whitespace:true,message:"不能只有空格"}]}
                     >
                         <Input
                             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -52,6 +57,4 @@ export default class Login extends Component{
         </div>);
     }
 }
-/*
-const WrapLogin =Form.useForm(<Login />);
-export default WrapLogin;*/
+
