@@ -3,10 +3,14 @@ import { Form, Input, Button } from 'antd';
 import {UserOutlined,LockOutlined} from '@ant-design/icons'
 import './login.less';
 import logo from './images/logo.png';
+import {reqLogin,reqAddUser} from '../../api';
+
 export default class Login extends Component{
     render() {
         const onFinish = (values: any) => {
-            console.log('Received values of form: ', values);
+            const {username,password}=values;
+            reqLogin(username,password).then(response=>console.log('成功了！',response.data)).catch(error=>console.log("失败了！",error));
+            //console.log('Received values of form: ', values);
         };
 
         return (<div className="login">
