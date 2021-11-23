@@ -1,15 +1,43 @@
 import React,{Component} from 'react';
-import { Form, Input, Button } from 'antd';
+//import { useNavigate} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+//import  {browserHistory} from 'react-router';
+import { Form, Input, Button ,message} from 'antd';
 import {UserOutlined,LockOutlined} from '@ant-design/icons'
 import './login.less';
 import logo from './images/logo.png';
 import {reqLogin,reqAddUser} from '../../api';
+//let navigate = useNavigate();
+/*const navigate=()=>{
+    let navigate = useNavigate();
+    navigate("/admin",{replace:true} );
+}*/
 
 export default class Login extends Component{
+
     render() {
-        const onFinish = (values: any) => {
+        const onFinish = async (values: any) => {
+            //let navigate = useNavigate();
             const {username,password}=values;
-            reqLogin(username,password).then(response=>console.log('成功了！',response.data)).catch(error=>console.log("失败了！",error));
+            /*try {*/
+                const result = await reqLogin(username,password);
+                  // console.log("请求成功了",response.data);
+             /* }catch (e) {
+                   console.log("请求出错了",e);
+               }*/
+             if(result.status ===0 )
+             {
+
+                message.success('登录成功');
+                 const history = createBrowserHistory();
+                history.replace('/');
+                window.location.reload();
+                 //navigate();
+             } else{
+                 message.error(result.msg);
+             }
+
+
             //console.log('Received values of form: ', values);
         };
 
