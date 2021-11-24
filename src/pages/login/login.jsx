@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-//import { useNavigate} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 //import  {browserHistory} from 'react-router';
 import { Form, Input, Button ,message} from 'antd';
@@ -7,6 +6,9 @@ import {UserOutlined,LockOutlined} from '@ant-design/icons'
 import './login.less';
 import logo from './images/logo.png';
 import {reqLogin,reqAddUser} from '../../api';
+import  memoryUtils from '../../utils/memoryUtils';
+import  storageUtils from '../../utils/storageUtils';
+
 //let navigate = useNavigate();
 /*const navigate=()=>{
     let navigate = useNavigate();
@@ -29,9 +31,15 @@ export default class Login extends Component{
              {
 
                 message.success('登录成功');
-                 const history = createBrowserHistory();
-                history.replace('/');
-                window.location.reload();
+                const user =result.user;
+                 memoryUtils.user = user;
+                 storageUtils.saveUser(user);
+                 console.log('login'+memoryUtils.user);
+                 const history = createBrowserHistory( {forceRefresh: true});
+                history.replace('/',user);
+                history.go();
+
+                //location.href;
                  //navigate();
              } else{
                  message.error(result.msg);
