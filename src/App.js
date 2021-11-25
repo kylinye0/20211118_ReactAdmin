@@ -9,7 +9,7 @@ export default class App extends Component{
 
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<Admin />}></Route>
+                    <Route path='/*' element={<Admin />}></Route>
                     <Route path='/login' element={<Login />}></Route>
                 </Routes>
             </BrowserRouter>

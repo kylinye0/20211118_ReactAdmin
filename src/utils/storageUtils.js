@@ -5,17 +5,19 @@ import store from 'store';
 const USER_KEY = "user_key";
 const saveUser=(user)=>{
     store.set(USER_KEY,user);
+
 }
 const  getUser=(user)=>
 {
     //return JSON.parse( localStorage.getItem(USER_KEY||'{}');
     return store.get(USER_KEY)||{};
 }
-const removeUser=(user)=>
+const removeUser=()=>
 {
     //localStorage.removeItem(USER_KEY);
-    store.remote(USER_KEY);
+    store.remove(USER_KEY);
 }
+
 export default {
     saveUser,
     getUser,

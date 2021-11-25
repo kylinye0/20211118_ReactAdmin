@@ -25,7 +25,7 @@ export default class ItOpeLeftNave extends Component {
                     theme="dark"
                 >
                     <Menu.Item key="1" icon={<PieChartOutlined />}>
-                        <Link to="/" >主页</Link>
+                        <Link to="/home" >主页</Link>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<DesktopOutlined />}>
                         <Link to="/itoperations/add">增加知识库</Link>

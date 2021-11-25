@@ -44,18 +44,15 @@ export default class MainLayout extends Component {
             return (
                 <LeftNave></LeftNave>
             );
-        }
-        else {
-            if (key === '2') {
+        } else  if (key === '2') {
                 return (
                     <ItOpeLeftNave></ItOpeLeftNave>
                     //<ItOpeSiderLeftNave></ItOpeSiderLeftNave>
                 );
+            } else {
+
             }
-            else {
-                return (<Sider>当前目录未设置</Sider>);
-            }
-        }
+
     }
     render() {
         let LeftNave = this.renderLeftNave();
