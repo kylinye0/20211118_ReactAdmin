@@ -4,6 +4,7 @@ import '../../antd.less';
 import {Table, Space, Input, Button} from 'antd';
 import moment from 'moment';
 import {SearchOutlined} from '@ant-design/icons';
+import {reqItoperation} from "../../api/index";
 
 
 
@@ -290,8 +291,8 @@ export default class Query extends Component {
 
     async populateITOperationData() {
         /*const response = await fetch('ITOperation/id=5'); api/ITOperations*/
-        const response = await fetch('api/ITOperations');
-        if (response.status === 200) {
+        /*iconst response = await fetch('api/ITOperations');
+        f (response.status === 200) {
             var data = [];
             const json = await response.json();
             if (JSON.stringify(json).indexOf("{")===0) {
@@ -304,8 +305,11 @@ export default class Query extends Component {
         }
         else {
             alert("网页发生错误，代码是"+response.status);
-        }
-       
-        
+        }*/
+
+       const itoperation=await reqItoperation();
+       const data = JSON.stringify(itoperation);
+       alert(data);
+       this.setState({itoperations:data,loading:false});
     }
 }

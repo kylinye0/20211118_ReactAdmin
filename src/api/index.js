@@ -10,4 +10,5 @@ export function reqAddUser() {
 const BASE="/api";
 export const reqLogin=(username,password)=>ajax(BASE+'/login',{"username":username,"password":password},'POST');
 export const reqAddUser = (user)=>ajax(BASE+'/manage/user/add',user,'POST');
+export const reqItoperation =(id)=>ajax(BASE+'/ItOperations',{"id":id},'GET');
 //export const reqQueryItope = (user)=>ajax(BASE+'/manage/user/add',user,'POST');
