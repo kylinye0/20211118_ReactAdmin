@@ -1,10 +1,12 @@
 ﻿import React, { Component, createRef } from 'react';
 import '../../antd.less';
-import { Input, Select, DatePicker, Button, Form, Upload, Row, Col } from 'antd';
+import { Input, Select, DatePicker, Button, Form, Upload, Row, Col ,message} from 'antd';
 //import { FormInstance } from 'antd/es/form';
 import { UploadOutlined } from '@ant-design/icons';
 import 'moment/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
+import '../../api/index'
+import {reqAddItope} from "../../api";
 const { TextArea } = Input;
 
 
@@ -18,9 +20,9 @@ const formItemLayout = {
 const buttonItemLayout = {
     wrapperCol: { span: 14, offset: 4 }
 };
-const onFinish = (values) => {
-    console.log("增加知识库条目" + values);
-    fetch('api/ITOperations', {
+const onFinish = async (values) => {
+    console.log("增加知识库条目" +JSON.stringify(values) );
+  /*  fetch('api/ITOperations', {
         headers: {
             'content-type': 'application/json'
         },
@@ -28,7 +30,15 @@ const onFinish = (values) => {
         //body: values
          body:JSON.stringify(values)
     }).then(response => response.json())
-        .catch(error => console.error('Error', error));
+        .catch(error => console.error('Error', error));*/
+
+    const result = await reqAddItope(values);
+    if(result.status===0)
+    {
+        message.success(result.msg);
+    }
+    else
+        message.error(result.msg);
 }
 export default class Add extends Component {
    

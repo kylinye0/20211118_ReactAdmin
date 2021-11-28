@@ -4,6 +4,7 @@ import axios from 'axios';
 import {message} from "antd";
 
 export default function ajax(url,data={},method="GET") {
+    alert(url+data);
     return new Promise((resolve,reject)=>{
         let promise;
         if(method==="GET"){

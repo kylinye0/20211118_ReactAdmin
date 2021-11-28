@@ -291,10 +291,11 @@ export default class Query extends Component {
 
     async populateITOperationData() {
         /*const response = await fetch('ITOperation/id=5'); api/ITOperations*/
-        /*iconst response = await fetch('api/ITOperations');
-        f (response.status === 200) {
+/*        const response = await fetch('api/ITOperations');
+        if (response.status === 200) {
             var data = [];
             const json = await response.json();
+            alert(json);
             if (JSON.stringify(json).indexOf("{")===0) {
                 data.push(json);
             }
@@ -307,9 +308,9 @@ export default class Query extends Component {
             alert("网页发生错误，代码是"+response.status);
         }*/
 
-       const itoperation=await reqItoperation();
+        const itoperation=await reqItoperation();
        const data = JSON.stringify(itoperation);
-       alert(data);
+       alert(itoperation);
        this.setState({itoperations:data,loading:false});
     }
 }
