@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import {Navigate,Routes,Route,BrowserRouter} from 'react-router-dom';
+import React, {Component} from 'react';
+import {Navigate,Routes,Route} from 'react-router-dom';
 import memoryUtils from '../../utils/memoryUtils';
 import MainLayout from '../../components/mainlayout';
 import Home from  '../home/home';

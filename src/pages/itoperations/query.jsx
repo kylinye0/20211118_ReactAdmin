@@ -309,8 +309,6 @@ export default class Query extends Component {
         }*/
 
         const itoperation=await reqItoperation();
-       const data = JSON.stringify(itoperation);
-       alert(itoperation);
-       this.setState({itoperations:data,loading:false});
+       this.setState({itoperations:itoperation,loading:false});
     }
 }

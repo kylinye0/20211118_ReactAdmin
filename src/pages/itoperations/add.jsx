@@ -1,11 +1,11 @@
-﻿import React, { Component, createRef } from 'react';
+﻿import React, { Component } from 'react';
+import {Navigate, useNavigate} from 'react-router-dom';
 import '../../antd.less';
 import { Input, Select, DatePicker, Button, Form, Upload, Row, Col ,message} from 'antd';
-//import { FormInstance } from 'antd/es/form';
 import { UploadOutlined } from '@ant-design/icons';
 import 'moment/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
-import '../../api/index'
+import '../../api/index';
 import {reqAddItope} from "../../api";
 const { TextArea } = Input;
 
@@ -21,7 +21,7 @@ const buttonItemLayout = {
     wrapperCol: { span: 14, offset: 4 }
 };
 const onFinish = async (values) => {
-    console.log("增加知识库条目" +JSON.stringify(values) );
+    //console.log("增加知识库条目" +JSON.stringify(values) );
   /*  fetch('api/ITOperations', {
         headers: {
             'content-type': 'application/json'
@@ -31,19 +31,23 @@ const onFinish = async (values) => {
          body:JSON.stringify(values)
     }).then(response => response.json())
         .catch(error => console.error('Error', error));*/
-
+    //const navigate = useNavigate();
     const result = await reqAddItope(values);
     if(result.status===0)
     {
         message.success(result.msg);
+        //onClick={()=>{return <Navigate to="/itoperations/query"/> }}
+        //return <Navigate to="/itoperations/query"/>;
     }
-    else
+    else {
         message.error(result.msg);
+    }
 }
+
 export default class Add extends Component {
    
     render() {
-       
+
         return (
             <div>
             <h1>增加知识库条目</h1>
