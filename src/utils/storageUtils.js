@@ -17,7 +17,7 @@ const removeUser=()=>
     //localStorage.removeItem(USER_KEY);
     store.remove(USER_KEY);
 }
-
+// eslint-disable-next-line
 export default {
     saveUser,
     getUser,

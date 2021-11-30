@@ -37,6 +37,11 @@ export default class Home extends Component {
                 this.formRef.current.setFieldsValue({
                     note: 'Hi there!',
                 });
+                break;
+            default:this.formRef.current.setFieldsValue({
+                note: 'Hi default!',
+            });
+
         }
     };
     onFinish = (values) => {

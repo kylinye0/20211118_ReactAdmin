@@ -45,7 +45,7 @@ export default class Index extends Component {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} onClick={this.handleMenu}>
 
                     <Menu.Item key="1" ><Link to='/home'><HomeFilled /></Link></Menu.Item>
-                    <Menu.Item key="2"><Link to="/itoperations/add">IT知识库</Link></Menu.Item>
+                    <Menu.Item key="2"><Link to="/home">IT知识库</Link></Menu.Item>
                     <Menu.Item key="3" ><Link to="/fetch-data">FetchData</Link></Menu.Item>
 
                     <SubMenu key="sub1" icon={<NotificationOutlined />} title={memoryUtils.user.UserName} style={{position:'absolute',right:'100px'}}>

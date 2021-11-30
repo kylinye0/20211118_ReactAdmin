@@ -5,7 +5,7 @@ import { Form, Input, Button ,message} from 'antd';
 import {UserOutlined,LockOutlined} from '@ant-design/icons'
 import './login.less';
 import logo from './images/logo.png';
-import {reqLogin,reqAddUser} from '../../api';
+import {reqLogin} from '../../api';
 import  memoryUtils from '../../utils/memoryUtils';
 import  storageUtils from '../../utils/storageUtils';
 
@@ -36,8 +36,9 @@ export default class Login extends Component{
                  storageUtils.saveUser(user);
                  //console.log('login'+memoryUtils.user);
                  const history = createBrowserHistory( {forceRefresh: true});
-                history.replace('/',user);
-                history.go();
+                 history.replace('/',user);
+                 memoryUtils.key = 1;
+                 history.go();
 
                 //location.href;
                  //navigate();

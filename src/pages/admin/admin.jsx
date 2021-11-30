@@ -17,9 +17,10 @@ export default class Admin extends Component {
         return (
             <MainLayout>
             <Routes>
-            <Route exact path='/home' element={<Home />} />
+            <Route path='/home' element={<Home />} />
                 <Route path='/itoperations/add' element={<Add />} />
                 <Route path='/itoperations/query' element={<Query />} />
+
 
 
             </Routes>

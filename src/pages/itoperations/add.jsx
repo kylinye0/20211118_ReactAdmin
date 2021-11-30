@@ -1,5 +1,5 @@
-﻿import React, { Component } from 'react';
-import {Navigate, useNavigate} from 'react-router-dom';
+import React, { Component } from 'react';
+import {createBrowserHistory} from 'history';
 import '../../antd.less';
 import { Input, Select, DatePicker, Button, Form, Upload, Row, Col ,message} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -7,45 +7,49 @@ import 'moment/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import '../../api/index';
 import {reqAddItope} from "../../api";
+import moment from 'moment';
 const { TextArea } = Input;
 
 
-const formLayout = {
-    labelCol: { span:6},
-    wrapperCol: { span: 20}
-};
-const formItemLayout = {
-    wrapperCol: { span: 14, offset: 4 }
-};
-const buttonItemLayout = {
-    wrapperCol: { span: 14, offset: 4 }
-};
-const onFinish = async (values) => {
-    //console.log("增加知识库条目" +JSON.stringify(values) );
-  /*  fetch('api/ITOperations', {
-        headers: {
-            'content-type': 'application/json'
-        },
-        method: 'post',
-        //body: values
-         body:JSON.stringify(values)
-    }).then(response => response.json())
-        .catch(error => console.error('Error', error));*/
-    //const navigate = useNavigate();
-    const result = await reqAddItope(values);
-    if(result.status===0)
-    {
-        message.success(result.msg);
-        //onClick={()=>{return <Navigate to="/itoperations/query"/> }}
-        //return <Navigate to="/itoperations/query"/>;
-    }
-    else {
-        message.error(result.msg);
-    }
-}
+// const formLayout = {
+//     labelCol: { span:6},
+//     wrapperCol: { span: 20}
+// };
+// const formItemLayout = {
+//     wrapperCol: { span: 14, offset: 4 }
+// };
+// const buttonItemLayout = {
+//     wrapperCol: { span: 14, offset: 4 }
+// };
+
 
 export default class Add extends Component {
-   
+     onFinish = async (values) => {
+        //console.log("增加知识库条目" +JSON.stringify(values) );
+        /*  fetch('api/ITOperations', {
+              headers: {
+                  'content-type': 'application/json'
+              },
+              method: 'post',
+              //body: values
+               body:JSON.stringify(values)
+          }).then(response => response.json())
+              .catch(error => console.error('Error', error));*/
+        //const navigate = useNavigate();
+        const result = await reqAddItope(values);
+        const history = createBrowserHistory();
+
+        if(result.status===0)
+        {
+            message.success(result.msg);
+
+            history.replace('/itoperations/query');
+            history.go();
+        }
+        else {
+            message.error(result.msg);
+        }
+    }
     render() {
 
         return (
@@ -53,9 +57,9 @@ export default class Add extends Component {
             <h1>增加知识库条目</h1>
                 <Form
                     layout="horizontal"
-                    initialValues={{ QuestionType:'用友相关' } }
+                    initialValues={{ QuestionType:'用友相关',RegisDate:moment(new Date(),"YYYY/MM/DD")}  }
                     size="default"
-                    onFinish={onFinish}
+                    onFinish={this.onFinish}
             >
                 <>
                     
@@ -116,12 +120,9 @@ export default class Add extends Component {
                                 </Button>
                         </Col>
                         <Col>
-                            <Button
-                                    onClick={() => {
-                                      
-                                }}
+                            <Button onClick={()=>{}}
                             >
-                                清除
+
                             </Button>
                         </Col>
                     </Row>

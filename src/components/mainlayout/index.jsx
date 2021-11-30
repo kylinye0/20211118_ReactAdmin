@@ -38,8 +38,8 @@ export default class MainLayout extends Component {
             });
     }
     renderLeftNave() {
-
         var key = this.state.key;
+        //var key = memoryUtils.key;
         if (key === '1') {
             return (
                 <LeftNave></LeftNave>

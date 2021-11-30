@@ -1,4 +1,4 @@
-﻿import React, { Component } from 'react';
+import React, { Component } from 'react';
 import '../../antd.less';
 
 import {Table, Space, Input, Button} from 'antd';
@@ -26,20 +26,20 @@ export default class Query extends Component {
     }
 
 
-   /* getColumnSearchProps = dataIndex => (
-        {
-            filterDropdown: ({ setSelectedkeys, selectedKeys, confirm, clearFilters }) => (
-                <div>
-                    <Input />
-                    <Space>
-                        <Button>搜索</Button>
-                        <Button>重置</Button>
-                        <Button>筛选</Button>
-                    </Space>
-                </div>
-            ),
-        }
-    );*/
+    /* getColumnSearchProps = dataIndex => (
+         {
+             filterDropdown: ({ setSelectedkeys, selectedKeys, confirm, clearFilters }) => (
+                 <div>
+                     <Input />
+                     <Space>
+                         <Button>搜索</Button>
+                         <Button>重置</Button>
+                         <Button>筛选</Button>
+                     </Space>
+                 </div>
+             ),
+         }
+     );*/
 
     getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -93,18 +93,18 @@ export default class Query extends Component {
                 setTimeout(() => this.searchInput.select(), 100);
             }
         },
-      /*  render: text =>
-            this.state.searchedColumn === dataIndex ? (
-                    <label style={backgroundColor:'ffc069'}></label>
-               {/!* <Highlighter
-                    highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-                    searchWords={[this.state.searchText]}
-                    autoEscape
-                    textToHighlight={text ? text.toString() : ''}
-                />*!/}
-            ) : (
-                text
-            ),*/
+        /*  render: text =>
+              this.state.searchedColumn === dataIndex ? (
+                      <label style={backgroundColor:'ffc069'}></label>
+                 {/!* <Highlighter
+                      highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+                      searchWords={[this.state.searchText]}
+                      autoEscape
+                      textToHighlight={text ? text.toString() : ''}
+                  />*!/}
+              ) : (
+                  text
+              ),*/
     });
 
     handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -120,7 +120,7 @@ export default class Query extends Component {
         this.setState({ searchText: '' });
     };
 
-     renderitoperationsTable(itoperations) {
+    renderitoperationsTable(itoperations) {
         const columns = [
             {
                 title: '序列号',
@@ -134,19 +134,19 @@ export default class Query extends Component {
                   }],*/
                 /*   onFilter: (value, record) => alert(record.name.include(value)),*/
             },
-           /* {
-                title: '问题号',
-                dataIndex: 'qno',
-                key: 'qno',
-                
-                render: text => <a >{text}</a>,
-                //sorter: (a, b) => a.id - b.id,
-                  filters: [{
-                      text: '3',
-                      value:'3',
-                  }],
-                   onFilter: (value, record) => alert(record.name.include(value)),
-            },*/
+            /* {
+                 title: '问题号',
+                 dataIndex: 'qno',
+                 key: 'qno',
+
+                 render: text => <a >{text}</a>,
+                 //sorter: (a, b) => a.id - b.id,
+                   filters: [{
+                       text: '3',
+                       value:'3',
+                   }],
+                    onFilter: (value, record) => alert(record.name.include(value)),
+             },*/
             {
                 title: 'IT相关',
                 dataIndex: 'QuestionType',
@@ -260,7 +260,7 @@ export default class Query extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <Space size="middle">
-                        <a href="#!">Invite {record.id}</a>
+                        <a href="#!">Invite {record.ID} </a>
                         <a href="#!">Delete</a>
                     </Space>
                 ),
@@ -268,7 +268,7 @@ export default class Query extends Component {
         ];
 
         return (
-            <Table columns={columns} dataSource={itoperations}></Table>
+            <Table columns={columns} dataSource={itoperations} rowkey="ID"></Table>
         );
     }
 
@@ -291,24 +291,24 @@ export default class Query extends Component {
 
     async populateITOperationData() {
         /*const response = await fetch('ITOperation/id=5'); api/ITOperations*/
-/*        const response = await fetch('api/ITOperations');
-        if (response.status === 200) {
-            var data = [];
-            const json = await response.json();
-            alert(json);
-            if (JSON.stringify(json).indexOf("{")===0) {
-                data.push(json);
-            }
-            else {
-                data = json;
-            }
-            this.setState({ itoperations: data, loading: false });
-        }
-        else {
-            alert("网页发生错误，代码是"+response.status);
-        }*/
+        /*        const response = await fetch('api/ITOperations');
+                if (response.status === 200) {
+                    var data = [];
+                    const json = await response.json();
+                    alert(json);
+                    if (JSON.stringify(json).indexOf("{")===0) {
+                        data.push(json);
+                    }
+                    else {
+                        data = json;
+                    }
+                    this.setState({ itoperations: data, loading: false });
+                }
+                else {
+                    alert("网页发生错误，代码是"+response.status);
+                }*/
 
         const itoperation=await reqItoperation();
-       this.setState({itoperations:itoperation,loading:false});
+        this.setState({itoperations:itoperation,loading:false});
     }
 }
