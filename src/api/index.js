@@ -12,3 +12,4 @@ export const reqLogin=(username,password)=>ajax(BASE+'/login',{"username":userna
 export const reqAddUser = (user)=>ajax(BASE+'/manage/user/add',user,'POST');
 export const reqItoperation =(id)=>ajax(BASE+'/ItOperations',{"id":id},'GET');
 export const reqAddItope = (itoperation)=>ajax(BASE+'/ItOperations',itoperation,'POST');
+export const reqRemoveItope = (id)=>ajax(BASE+'/ItOperations/'+id,{"id":id},'DELETE');

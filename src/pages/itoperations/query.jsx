@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../../antd.less';
 
-import {Table, Space, Input, Button} from 'antd';
+import {Table, Space, Input, Button,message} from 'antd';
 import moment from 'moment';
 import {SearchOutlined} from '@ant-design/icons';
-import {reqItoperation} from "../../api/index";
+import {reqItoperation,reqRemoveItope} from "../../api/index";
 
 
 
@@ -119,7 +119,22 @@ export default class Query extends Component {
         clearFilters();
         this.setState({ searchText: '' });
     };
+     handleRemoveItope=async(key:React.key)=> {
+         alert(key );
+         const result = await reqRemoveItope(key);
+         if (result.status===0)
+         {
+             const dataSource = [...this.state.itoperations];
+             this.setState({ itoperations: dataSource.filter(item => item.key !== key) });
+             message.success(result.msg);
 
+         }
+         else
+         {
+             message.error(result.msg);
+         }
+
+    }
     renderitoperationsTable(itoperations) {
         const columns = [
             {
@@ -260,15 +275,16 @@ export default class Query extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <Space size="middle">
-                        <a href="#!">Invite {record.ID} </a>
-                        <a href="#!">Delete</a>
+                        <a href="#!">Invite {record.key} </a>
+                        <a href="#!" type="button" onClick={()=>this.handleRemoveItope({key:record.key})
+                        }>Delete</a>
                     </Space>
                 ),
             },
         ];
 
         return (
-            <Table columns={columns} dataSource={itoperations} rowkey="ID"></Table>
+            <Table columns={columns} dataSource={itoperations} rowkey={record=>record.ID}></Table>
         );
     }
 

@@ -6,13 +6,17 @@ import {message} from "antd";
 export default function ajax(url,data={},method="GET") {
     //alert(url+data);
     return new Promise((resolve,reject)=>{
+        // alert(method);
         let promise;
         if(method==="GET"){
             promise= axios.get(url,{
                 params: data
             })
-        } else {
+        } else if(method==="POST"){
             promise=  axios.post(url,data  );
+        }
+        else if(method==="DELETE"){
+            promise=axios.delete(url,data);
         }
         promise.then(response=>{
             resolve(response.data);
