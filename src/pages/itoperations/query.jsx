@@ -119,13 +119,12 @@ export default class Query extends Component {
         clearFilters();
         this.setState({ searchText: '' });
     };
-     handleRemoveItope=async(key:React.key)=> {
-         alert(key );
-         const result = await reqRemoveItope(key);
+     handleRemoveItope=async(id)=> {
+         const result = await reqRemoveItope(id);
          if (result.status===0)
          {
              const dataSource = [...this.state.itoperations];
-             this.setState({ itoperations: dataSource.filter(item => item.key !== key) });
+             this.setState({ itoperations: dataSource.filter(item => item.ID !== id) });
              message.success(result.msg);
 
          }
@@ -275,8 +274,8 @@ export default class Query extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <Space size="middle">
-                        <a href="#!">Invite {record.key} </a>
-                        <a href="#!" type="button" onClick={()=>this.handleRemoveItope({key:record.key})
+                        <a href="#!">Invite {record.ID} </a>
+                        <a href="#!" type="button" onClick={()=>this.handleRemoveItope(record.ID)
                         }>Delete</a>
                     </Space>
                 ),
