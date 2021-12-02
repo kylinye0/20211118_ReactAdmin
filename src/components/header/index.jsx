@@ -34,6 +34,8 @@ export default class Index extends Component {
 
         }else {
             this.props.parent.getNavMenuKey(this, e.key);
+            storageUtils.saveLeftnav(e.key);
+
         }
     }
 

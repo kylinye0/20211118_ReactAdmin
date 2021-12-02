@@ -3,6 +3,7 @@
 */
 import store from 'store';
 const USER_KEY = "user_key";
+const LEFTNAV_KEY = "leftnav_key";
 const saveUser=(user)=>{
     store.set(USER_KEY,user);
 
@@ -17,11 +18,29 @@ const removeUser=()=>
     //localStorage.removeItem(USER_KEY);
     store.remove(USER_KEY);
 }
+
+const saveLeftnav=(leftnav)=>{
+    store.set(LEFTNAV_KEY,leftnav);
+
+}
+const  getLeftnav=()=>
+{
+    //return JSON.parse( localStorage.getItem(USER_KEY||'{}');
+    return store.get(LEFTNAV_KEY)||"";
+}
+const removeLeftnav=()=>
+{
+    //localStorage.removeItem(USER_KEY);
+    store.remove(LEFTNAV_KEY);
+}
 // eslint-disable-next-line
 export default {
     saveUser,
     getUser,
-    removeUser
+    removeUser,
+    saveLeftnav,
+    getLeftnav,
+    removeLeftnav
 }
 /*
 export default {

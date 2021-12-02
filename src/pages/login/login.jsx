@@ -37,7 +37,7 @@ export default class Login extends Component{
                  //console.log('login'+memoryUtils.user);
                  const history = createBrowserHistory( {forceRefresh: true});
                  history.replace('/',user);
-                 memoryUtils.key = 1;
+                storageUtils.saveLeftnav("1");
                  history.go();
 
                 //location.href;

@@ -283,7 +283,9 @@ export default class Query extends Component {
         ];
 
         return (
+            <div>
             <Table columns={columns} dataSource={itoperations} rowkey={record=>record.ID}></Table>
+            </div>
         );
     }
 
@@ -297,6 +299,7 @@ export default class Query extends Component {
 
         return (
             <div>
+                <div>{}</div>
                 <h1 id="tabelLabel" >IT知识库列表</h1>
                 <p>筛选排序都在标题里</p>
                 {contents}

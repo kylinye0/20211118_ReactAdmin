@@ -8,6 +8,7 @@ import locale from 'antd/es/date-picker/locale/zh_CN';
 import '../../api/index';
 import {reqAddItope} from "../../api";
 import moment from 'moment';
+import storageUtils from "../../utils/storageUtils";
 const { TextArea } = Input;
 
 
@@ -41,6 +42,7 @@ export default class Add extends Component {
 
         if(result.status===0)
         {
+            storageUtils.saveLeftnav("2");
             message.success(result.msg);
 
             history.replace('/itoperations/query');

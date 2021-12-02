@@ -4,6 +4,8 @@ import { Layout, Breadcrumb, Button } from 'antd';
 import Header from '../header';
 import LeftNave from '../left-nav';
 import ItOpeLeftNave from '../itope-left-nav';
+import memoryUtils from '../../utils/memoryUtils';
+
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined
@@ -20,7 +22,7 @@ export default class MainLayout extends Component {
         this.getNavMenuKey = this.getNavMenuKey.bind(this);
         this.state = {
             collapsed: false,
-            key: "1"
+            key: memoryUtils.leftnavkey
         };
     }
 
@@ -39,6 +41,7 @@ export default class MainLayout extends Component {
     }
     renderLeftNave() {
         var key = this.state.key;
+        //alert(key);
         //var key = memoryUtils.key;
         if (key === '1') {
             return (
@@ -86,6 +89,7 @@ export default class MainLayout extends Component {
                             {this.props.children}
 
                         </Content>
+
                     </Layout>
                 </Layout>
             </Layout>
