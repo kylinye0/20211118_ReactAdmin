@@ -28,10 +28,10 @@ export default class ItOpeLeftNave extends Component {
                         <Link to="/home" >主页</Link>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<DesktopOutlined />}>
-                        <Link to="/itoperations/add">增加知识库</Link>
+                        <Link to="/itoperation/add">增加知识库</Link>
                     </Menu.Item>
                     <Menu.Item key="3" icon={<ContainerOutlined />}>
-                        <Link to="/itoperations/query">知识库列表</Link>
+                        <Link to="/itoperation/query">知识库列表</Link>
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
                         <Menu.Item key="5"></Menu.Item>

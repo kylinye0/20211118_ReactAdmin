@@ -45,7 +45,7 @@ export default class Add extends Component {
             storageUtils.saveLeftnav("2");
             message.success(result.msg);
 
-            history.replace('/itoperations/query');
+            history.replace('/itoperation/query');
             history.go();
         }
         else {

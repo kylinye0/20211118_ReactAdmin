@@ -205,7 +205,7 @@ export default class Query extends Component {
             },
             {
                 title: 'IT问题',
-                dataIndex: 'Question',
+                dataIndex: 'Questiontype',
                 key: 'question',
                 ...this.getColumnSearchProps('question'),
                 /* filterDropdown:  ({ setSelectedkeys, selectedKeys, confirm, clearFilters }) => (

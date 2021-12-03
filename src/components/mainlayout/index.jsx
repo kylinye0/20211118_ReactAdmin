@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Layout, Breadcrumb, Button } from 'antd';
-//import { ItOpeSiderLeftNave } from './itoperations/ItOpeLeftNave';
 import Header from '../header';
 import LeftNave from '../left-nav';
 import ItOpeLeftNave from '../itope-left-nav';
