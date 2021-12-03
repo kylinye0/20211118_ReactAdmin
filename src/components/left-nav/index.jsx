@@ -3,50 +3,77 @@ import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
 import './index.less';
-import {
-    AppstoreOutlined,
-    PieChartOutlined,
-    DesktopOutlined,
-    ContainerOutlined,
-    MailOutlined
-} from '@ant-design/icons';
+import menuList from '../../config/menuConfig';
 const { SubMenu } = Menu;
 export default class Header extends Component {
     static displayName = Header.name;
-
-
+    getMenuNodes_map=(menuList)=>{
+        return menuList.map(item=>{
+            // {
+            //     title:'首页',
+            //         key:'/home',
+            //     icon:'home',
+             //       children:[]
+            // }
+            if(!item.children)
+            {
+                return(
+                    <Menu.Item key={item.key} icon={item.icon}>
+                        <Link to={item.key} >
+                            <span>{item.title}</span></Link>
+                    </Menu.Item>
+                );
+            }
+            else
+            {
+                return(
+                    <SubMenu key={item.key} title={
+                        <span>
+                        <span>{item.title}</span></span>
+                    }>
+                        {this.getMenuNodes(item.children)}
+                    </SubMenu>
+                );
+            }
+        });
+    }
+    getMenuNodes=(menuList)=>{
+        return menuList.reduce((pre,item)=>{
+            if(!item.children)
+            {
+                pre.push(
+                    ( <Menu.Item key={item.key} icon={item.icon}>
+                        <Link to={item.key} >
+                            <span>{item.title}</span></Link>
+                    </Menu.Item>)
+                );
+            }else {
+                pre.push((
+                    <SubMenu key={item.key} title={
+                        <span>
+                        <span>{item.title}</span></span>
+                    }>
+                        {this.getMenuNodes(item.children)}
+                    </SubMenu>
+                ));
+            }
+            return pre;
+        },[])
+    }
     render() {
+
         return (
             <Layout  >
 
                 <Menu
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
+                    defaultSelectedKeys={['/home']}
+                    defaultOpenKeys={['/itoperations']}
                     mode="inline"
                     theme="dark"
                 >
-                    <Menu.Item key="1" icon={<PieChartOutlined />}>
-                        <Link to="/home" >主页</Link>
-                    </Menu.Item>
-                    <Menu.Item key="2" icon={<DesktopOutlined />}>
-                        <Link to="/user">用户管理</Link>
-                    </Menu.Item>
-                    <Menu.Item key="3" icon={<ContainerOutlined />}>
-                        <Link to="/role">角色管理</Link>
-                    </Menu.Item>
-                    <SubMenu key="sub1" icon={<MailOutlined />} title="图表">
-                        <Menu.Item key="5"><Link to="/bar">柱状图</Link></Menu.Item>
-                        <Menu.Item key="6"><Link to="/line">线状图</Link></Menu.Item>
-                        <Menu.Item key="7"><Link to="/pie">饼状图</Link></Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub2" icon={<AppstoreOutlined />} title="知识库">
-                        <Menu.Item key="9"><Link to="/itoperation">类型管理</Link></Menu.Item>
-                        <Menu.Item key="10"><Link to="/itoperation">知识库管理</Link></Menu.Item>
-                        <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="11">Option 11</Menu.Item>
-                            <Menu.Item key="12">Option 12</Menu.Item>
-                        </SubMenu>
-                    </SubMenu>
+                    {
+                        this.getMenuNodes_map(menuList)
+                    }
                 </Menu>
             </Layout>
         );

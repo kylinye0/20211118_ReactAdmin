@@ -1,40 +1,49 @@
-import {Menu} from "antd";
-import {Link} from "react-router-dom";
 
+import {
+    ContainerOutlined,
+    HomeOutlined,
+    UserOutlined,
+    IdcardOutlined,
+    ZhihuOutlined,
+    BarsOutlined,
+    BarChartOutlined,
+    LineChartOutlined,
+    PieChartOutlined
+} from '@ant-design/icons';
+import React from "react";
 const menuList=[
     {
         title:'首页',
         key:'/home',
-        icon:'home'
+        icon:<HomeOutlined />
+          /*  {render: (text, record) => (
+            <Space size="middle">
+                <HomeOutlined />
+            </Space>)}*/
     },
     {
         title:'用户管理',
         key:'/user',
-        icon:'user'
+        icon:<UserOutlined />
     },
     {
         title:'角色管理',
         key:'/role',
-        icon:'role'
-    },
-    {
-        title:'用户管理',
-        key:'/user',
-        icon:'user'
+        icon:<IdcardOutlined />
     },
     {
         title:'知识库',
         key:'/itoperations',
-        icon:'appstore',
+        icon:<ZhihuOutlined />,
         children:[
             {
                 title:'类型管理',
                 key:'/questiontype',
-                icon:'bars'
+                icon:<BarsOutlined />
             },{
                 title:'知识库管理',
                 key:'/itoperation',
-                icon:'bars'
+                icon:<ContainerOutlined />
             }
         ]
     },
@@ -46,15 +55,15 @@ const menuList=[
             {
                 title:'柱状图',
                 key:'/bar',
-                icon:'bars'
+                icon:<BarChartOutlined />
             },{
                 title:'线状图',
                 key:'/line',
-                icon:'bars'
+                icon:<LineChartOutlined />
             },{
                 title:'饼状图',
                 key:'/pie',
-                icon:'bars'
+                icon:<PieChartOutlined/>
             }
         ]
     },
@@ -62,13 +71,3 @@ const menuList=[
 
 export default menuList;
 
-
-</Menu.Item>
-<SubMenu key="sub1" icon={<MailOutlined />} title="图表">
-<Menu.Item key="5"><Link to="/bar">柱状图</Link></Menu.Item>
-<Menu.Item key="6"><Link to="/line">线状图</Link></Menu.Item>
-<Menu.Item key="7"><Link to="/pie">饼状图</Link></Menu.Item>
-</SubMenu>
-<SubMenu key="sub2" icon={<AppstoreOutlined />} title="知识库">
-<Menu.Item key="9"><Link to="/itoperation">类型管理</Link></Menu.Item>
-<Menu.Item key="10"><Link to="/itoperation">知识库管理</Link></Menu.Item>

@@ -11,6 +11,7 @@ import User from '../user/user';
 import Bar from '../charts/bar';
 import Line from '../charts/line';
 import Pie from '../charts/pie';
+import Questiontype from '../questiontype/questiontype';
 import storageUtils from '../../utils/storageUtils';
 //读取local中保存user，保存到内存中
 var leftnav = storageUtils.getLeftnav();
@@ -49,6 +50,7 @@ export default class Admin extends Component {
                         <Route path='/bar' element={<Bar />} />
                         <Route path='/itoperation/add' element={<Add />} />
                         <Route path='/itoperation/query' element={<Query />} />
+                        <Route path='/questiontype' element={<Questiontype />} />
                     </Routes>
                 </MainLayout>);
         }
