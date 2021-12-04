@@ -29,7 +29,11 @@ export default class Index extends Component {
             else
             {
                const cItem = item.children.find(cItem=>cItem.key===history.location.pathname);
-               this.openKey =cItem.key;
+               if(cItem)
+               {
+                   this.openKey =item.key;
+               }
+
                 return(
                     <SubMenu key={item.key} title={
                         <span>
@@ -52,6 +56,11 @@ export default class Index extends Component {
                     </Menu.Item>)
                 );
             }else {
+                const cItem = item.children.find(cItem=>cItem.key===history.location.pathname);
+                if(cItem)
+                {
+                    this.openKey =item.key;
+                }
                 pre.push((
                     <SubMenu key={item.key} title={
                         <span>
@@ -65,26 +74,31 @@ export default class Index extends Component {
         },[])
     }
     //在第一次render()之前执行一次，同步
-    componentWillMount(): void {
+   /* componentWillMount(): void {
+
+    }*/
+    UNSAFE_componentWillMount(): void {
         this.menuNodes = this.getMenuNodes_map(menuList);
     }
 
     render() {
         const path = history.location.pathname;
       //  const menuNodes = this.getMenuNodes()
-       const  openkey =this.openKey();
+       const  openkey =this.openKey;
+        //console.log("open"+openkey);
         return (
             <Layout  >
 
                 <Menu
-                    defaultOpenKeys={['/itoperations']}
+                    defaultOpenKeys={[openkey]}
                     mode="inline"
                     theme="dark"
                     defaultSelectedKeys={[path]}
-                    // selectedKeys={[history.location.pathname]}
+                    //selectedKeys={[path]}
+                    //openKeys={[openkey]}
                 >
                     {
-                        this.menuNodes()
+                        this.menuNodes
                         //this.getMenuNodes_map(menuList)
                     }
                 </Menu>

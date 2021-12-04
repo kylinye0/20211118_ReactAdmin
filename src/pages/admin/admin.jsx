@@ -22,7 +22,7 @@ export default class Admin extends Component {
 
         const user = memoryUtils.user;
         //alert(JSON.stringify(user.SafeLevel));
-        console.log(JSON.stringify(user));
+        //console.log(JSON.stringify(user));
         if(!leftnav || leftnav==="")
         {
             memoryUtils.leftnavkey ="1";

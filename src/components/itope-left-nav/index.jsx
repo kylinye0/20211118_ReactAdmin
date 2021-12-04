@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
-import {itopemenuList} from '../../config/menuConfig';
+import {itopemenuList, menuList} from '../../config/menuConfig';
 import { createBrowserHistory } from 'history';
 let history = createBrowserHistory();
 const { SubMenu } = Menu;
@@ -27,6 +27,11 @@ export default class Index extends Component {
             }
             else
             {
+                const cItem = item.children.find(cItem=>cItem.key===history.location.pathname);
+                if(cItem)
+                {
+                    this.openKey =item.key;
+                }
                 return(
                     <SubMenu key={item.key} title={
                         <span>
@@ -49,6 +54,11 @@ export default class Index extends Component {
                     </Menu.Item>)
                 );
             }else {
+                const cItem = item.children.find(cItem=>cItem.key===history.location.pathname);
+                if(cItem)
+                {
+                    this.openKey =item.key;
+                }
                 pre.push((
                     <SubMenu key={item.key} title={
                         <span>
@@ -61,15 +71,20 @@ export default class Index extends Component {
             return pre;
         },[])
     }
-    render() {
 
+    UNSAFE_componentWillMount(): void {
+        this.menuNodes = this.getMenuNodes_map(menuList);
+    }
+    render() {
+        const path = history.location.pathname;
+        const  openkey =this.openKey;
         return (
             <Layout  >
 
                 <Menu
-                    defaultSelectedKeys={[history.location.pathname]}
-                    defaultOpenKeys={['/itoperations']}
-                    //selectedKeys={[history.location.pathname]}
+                    defaultSelectedKeys={[path]}
+                    //defaultOpenKeys={['/itoperations']}
+                    defaultOpenKeys={[openkey]}
                     mode="inline"
                     theme="dark"
                 >
