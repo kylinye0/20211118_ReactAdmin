@@ -10,7 +10,7 @@ import {reqAddItope} from "../../api";
 import moment from 'moment';
 import storageUtils from "../../utils/storageUtils";
 const { TextArea } = Input;
-
+let history = createBrowserHistory();
 
 // const formLayout = {
 //     labelCol: { span:6},
@@ -38,7 +38,6 @@ export default class Add extends Component {
               .catch(error => console.error('Error', error));*/
         //const navigate = useNavigate();
         const result = await reqAddItope(values);
-        const history = createBrowserHistory();
 
         if(result.status===0)
         {

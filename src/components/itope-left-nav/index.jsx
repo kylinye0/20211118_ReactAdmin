@@ -1,44 +1,81 @@
 import React, { Component } from 'react';
-import '../../antd.less';
-import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-
-import {
-    PieChartOutlined,
-    DesktopOutlined,
-    ContainerOutlined,
-    MailOutlined
-} from '@ant-design/icons';
+import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
+import {itopemenuList} from '../../config/menuConfig';
+import { createBrowserHistory } from 'history';
+let history = createBrowserHistory();
 const { SubMenu } = Menu;
-export default class ItOpeLeftNave extends Component {
-    static displayName = Layout.name;
-
-
+export default class Index extends Component {
+    static displayName = Index.name;
+    getMenuNodes_map=(itopemenuList)=>{
+        return itopemenuList.map(item=>{
+            // {
+            //     title:'首页',
+            //         key:'/home',
+            //     icon:'home',
+            //       children:[]
+            // }
+            if(!item.children)
+            {
+                return(
+                    <Menu.Item key={item.key} icon={item.icon}>
+                        <Link to={item.key} >
+                            <span>{item.title}</span></Link>
+                    </Menu.Item>
+                );
+            }
+            else
+            {
+                return(
+                    <SubMenu key={item.key} title={
+                        <span>
+                        <span>{item.title}</span></span>
+                    }>
+                        {this.getMenuNodes(item.children)}
+                    </SubMenu>
+                );
+            }
+        });
+    }
+    getMenuNodes=(menuList)=>{
+        return menuList.reduce((pre,item)=>{
+            if(!item.children)
+            {
+                pre.push(
+                    ( <Menu.Item key={item.key} icon={item.icon}>
+                        <Link to={item.key} >
+                            <span>{item.title}</span></Link>
+                    </Menu.Item>)
+                );
+            }else {
+                pre.push((
+                    <SubMenu key={item.key} title={
+                        <span>
+                        <span>{item.title}</span></span>
+                    }>
+                        {this.getMenuNodes(item.children)}
+                    </SubMenu>
+                ));
+            }
+            return pre;
+        },[])
+    }
     render() {
+
         return (
             <Layout  >
 
                 <Menu
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
+                    defaultSelectedKeys={[history.location.pathname]}
+                    defaultOpenKeys={['/itoperations']}
+                    //selectedKeys={[history.location.pathname]}
                     mode="inline"
                     theme="dark"
                 >
-                    <Menu.Item key="1" icon={<PieChartOutlined />}>
-                        <Link to="/home" >主页</Link>
-                    </Menu.Item>
-                    <Menu.Item key="2" icon={<DesktopOutlined />}>
-                        <Link to="/itoperation/add">增加知识库</Link>
-                    </Menu.Item>
-                    <Menu.Item key="3" icon={<ContainerOutlined />}>
-                        <Link to="/itoperation/query">知识库列表</Link>
-                    </Menu.Item>
-                    <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-                        <Menu.Item key="5"></Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
-                        <Menu.Item key="7">Option 7</Menu.Item>
-                        <Menu.Item key="8">Option 8</Menu.Item>
-                    </SubMenu>
+                    {
+                        this.getMenuNodes(itopemenuList)
+                    }
                 </Menu>
             </Layout>
         );

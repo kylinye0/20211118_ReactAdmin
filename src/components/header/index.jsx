@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Layout, Menu } from 'antd';
 import { HomeFilled ,NotificationOutlined} from '@ant-design/icons';
 import storageUtils from "../../utils/storageUtils";
@@ -44,7 +43,7 @@ export default class Index extends Component {
             <Header className="header">
                 <div className="logo" />
 
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} onClick={this.handleMenu}>
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[memoryUtils.leftnavkey]} onClick={this.handleMenu}>
 
                     <Menu.Item key="1" ><Link to='/home'><HomeFilled /></Link></Menu.Item>
                     <Menu.Item key="2"><Link to="/home">IT知识库</Link></Menu.Item>
