@@ -28,8 +28,8 @@ export default class Index extends Component {
             }
             else
             {
-               const cItem = item.children.find(cItem=>cItem.key===path);
-               this.openKey =item.key;
+               const cItem = item.children.find(cItem=>cItem.key===history.location.pathname);
+               this.openKey =cItem.key;
                 return(
                     <SubMenu key={item.key} title={
                         <span>
@@ -71,7 +71,7 @@ export default class Index extends Component {
 
     render() {
         const path = history.location.pathname;
-        const menuNodes = this.getMenuNodes()
+      //  const menuNodes = this.getMenuNodes()
        const  openkey =this.openKey();
         return (
             <Layout  >
