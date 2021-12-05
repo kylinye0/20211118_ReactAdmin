@@ -139,7 +139,7 @@ export default class Query extends Component {
             {
                 title: '序号',
                 key: 'key',
-                render:record => <p>{}</p>
+                render:record => <p>{record.key}</p>
             },
             {
                 title: '序列号',
