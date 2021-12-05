@@ -6,8 +6,8 @@ import {itopemenuList, menuList} from '../../config/menuConfig';
 import { createBrowserHistory } from 'history';
 let history = createBrowserHistory();
 const { SubMenu } = Menu;
-export default class Index extends Component {
-    static displayName = Index.name;
+export default class Itopeleftnav extends Component {
+    static displayName = Itopeleftnav.name;
     getMenuNodes_map=(itopemenuList)=>{
         return itopemenuList.map(item=>{
             // {

@@ -40,7 +40,7 @@ export default class Index extends Component {
 
     render () {
         return (
-            <Header className="header">
+           <Header className="header">
                 <div className="logo" />
 
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[memoryUtils.leftnavkey]} onClick={this.handleMenu}>
@@ -56,8 +56,7 @@ export default class Index extends Component {
                         <Menu.Item key="12">option12</Menu.Item>
                     </SubMenu>
                 </Menu>
-
-            </Header>
+           </Header>
 
         );
     }

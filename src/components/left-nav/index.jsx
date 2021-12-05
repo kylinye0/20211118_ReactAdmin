@@ -7,8 +7,8 @@ import {menuList} from '../../config/menuConfig';
 import { createBrowserHistory } from 'history';
 let history = createBrowserHistory();
 const { SubMenu } = Menu;
-export default class Index extends Component {
-    static displayName = Index.name;
+export default class Leftnav extends Component {
+    static displayName = Leftnav.name;
     getMenuNodes_map=(menuList)=>{
         return menuList.map(item=>{
             // {

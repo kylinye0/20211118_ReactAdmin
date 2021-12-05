@@ -40,7 +40,6 @@ export default class Admin extends Component {
                 //navkey={memoryUtils.leftnavkey }
                 <MainLayout children={<Home />}>
                     <Routes>
-                        <Route path='/' element={<Home />} />
                         <Route path='/home' element={<Home />} />
                         <Route path='/role' element={<Role />} />
                         <Route path='/user' element={<User />} />
@@ -51,14 +50,15 @@ export default class Admin extends Component {
                         <Route path='/itoperation/add' element={<Add />} />
                         <Route path='/itoperation/query' element={<Query />} />
                         <Route path='/questiontype' element={<Questiontype />} />
+                        <Route path='*' element={<Home />} />
                     </Routes>
                 </MainLayout>);
         }
         else
         {return <Routes>
-            <Route path='/home' element={<Home />} />
             <Route path='/itoperation/add' element={<Add />} />
             <Route path='/itoperation/query' element={<Query />} />
+            <Route path='*' element={<Query />} />
         </Routes>}
 
     }

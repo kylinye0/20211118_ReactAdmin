@@ -137,6 +137,11 @@ export default class Query extends Component {
     renderitoperationsTable(itoperations) {
         const columns = [
             {
+                title: '序号',
+                key: 'key',
+                render:record => <p>{}</p>
+            },
+            {
                 title: '序列号',
                 dataIndex: 'ID',
                 key: 'id',
