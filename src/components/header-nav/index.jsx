@@ -7,8 +7,8 @@ import memoryUtils from "../../utils/memoryUtils";
 
 const { Header } = Layout;
 const {SubMenu} =Menu;
-export default class Index extends Component {
-    static displayName = Index.name;
+export default class Headernav extends Component {
+    static displayName = Headernav.name;
 
     constructor (props) {
         super(props);

@@ -143,7 +143,7 @@ postData('http://example.com/answer', { answer: 42 })
 function postData(url, data) {
     // Default options are marked with *
     return fetch(url, {
-        body: JSON.stringify(data), // must match 'Content-Type' header
+        body: JSON.stringify(data), // must match 'Content-Type' header-nav
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, same-origin, *omit
         headers: {

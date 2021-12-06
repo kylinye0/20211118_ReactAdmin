@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Layout, Breadcrumb, Button } from 'antd';
-import Header from '../header';
+import { Layout, Button } from 'antd';
+import Header from '../header-nav';
 import LeftNave from '../left-nav';
 import ItOpeLeftNave from '../itope-left-nav';
 import memoryUtils from '../../utils/memoryUtils';
+import MainHeader from '../mainheader-nav/index';
 
 import {
     MenuUnfoldOutlined,
@@ -70,13 +71,9 @@ export default class MainLayout extends Component {
                         </Button>
                         {LeftNave}
                     </Sider>
-                    <Layout style={{ padding: '0 24px 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>React</Breadcrumb.Item>
-                            <Breadcrumb.Item></Breadcrumb.Item>
+                    <Layout style={{ padding: '0px 24px 24px' }}>
+                        <MainHeader></MainHeader>
 
-
-                        </Breadcrumb>
                         <Content
                             className="site-layout-background"
                             style={{
