@@ -123,7 +123,7 @@ export default class Query extends Component {
          const result = await reqRemoveItope(id);
          if (result.status===0)
          {
-             const dataSource = [...this.state.itoperations];
+             const dataSource = [this.state.itoperations];
              this.setState({ itoperations: dataSource.filter(item => item.ID !== id) });
              message.success(result.msg);
 

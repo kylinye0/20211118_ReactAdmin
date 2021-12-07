@@ -15,13 +15,14 @@ export const reqItoperation =(id)=>ajax(BASE+'/ItOperations',{"id":id},'GET');
 export const reqAddItope = (itoperation)=>ajax(BASE+'/ItOperations',itoperation,'POST');
 export const reqRemoveItope = (id)=>ajax(BASE+'/ItOperations/'+id,{"id":id},'DELETE');
 
-export  const reqWeather=(id)=>{
-    const url = 'https://api.map.baidu.com/weather/v1/?district_id='+id+'&data_type=all&ak=2qXSvTfUwm2LWeQ4SRQ8E0XRZysvqWvA';
+export  const reqWeather=(location)=>{
+   // const url = 'https://api.map.baidu.com/weather/v1/?district_id='+id+'&data_type=all&ak=2qXSvTfUwm2LWeQ4SRQ8E0XRZysvqWvA';
+    const url = 'https://api.seniverse.com/v3/weather/now.json?key=S4jAeOgEk4Y3PuWWE&location='+location+'&language=zh-Hans&unit=c';
     jsonp(url,{},(err,data)=>{
-        console.log('json()',data);
+        console.log('json()',JSON.stringify(data));
         if(!err&&data.status===0)
         {
-         // const {text,uptime}=  data.result[0].now[0];
+         const {text,code}=  data.results[0].now[0];
         }
         else
         {
@@ -30,5 +31,5 @@ export  const reqWeather=(id)=>{
     })
 };
 
-reqWeather(331023);
+reqWeather('台州');
 /*json请求的接口请求函数*/
