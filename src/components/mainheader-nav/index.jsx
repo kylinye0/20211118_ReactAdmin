@@ -1,9 +1,38 @@
 import React,{Component} from 'react';
 import './index.less';
+import moment from 'moment';
+import memoryUtils from '../../utils/memoryUtils';
+import {reqWeather} from "../../api";
 //import {Breadcrumb} from "antd";
 //@author yekai 724456525@qq.com
 export default class Mainheadernav extends Component{
+    state={
+        currentTime:moment().format("YYYY-MM-DD hh:mm:ss"),
+        text:"",
+        code:""
+    }
+    getTime=()=>{
+        setInterval(()=>{
+            this.setState({currentTime:moment().format("YYYY-MM-DD hh:mm:ss")})
+        },1000);
+    }
+    getWeather=async ()=>{
+        const {text,code} = await reqWeather("台州");
+
+        this.setState({text:text,code:"../../assets/image/weather/"+code+"@1x.png"});
+
+
+    }
+    componentDidMount(): void {
+        this.getTime();
+        this.getWeather();
+    }
+
     render() {
+       // console.log(this.state.currentTime);
+        const {currentTime,text,code} = this.state;
+        const username =memoryUtils.user.UserName;
+        //console.log(code);
         return (
             <div className="header">
                 <div className="header-top">
@@ -12,18 +41,19 @@ export default class Mainheadernav extends Component{
                         <Breadcrumb.Item></Breadcrumb.Item>
 
                     </Breadcrumb>*/}
-                    <span>欢迎，admin</span>
+                    <span>欢迎，{username}</span>
                     <a href="javascripts:">退出</a>
                 </div>
                 <div className="header-bottom">
                     <div className="header-bottom-left">首页</div>
                     <div className="header-bottom-right">
-                        <span>2021-12-06</span>
+                        <span>{currentTime} </span>
+                        <img src={code} alt="weather" ></img>
                         {/*<iframe width="430" scrolling="no" height="25" frameBorder="0" allowTransparency="true"*/}
                         {/*        src="https://i.tianqi.com?c=code&id=1&icon=1&site=12" title="weather"></iframe>*/}
                        {/* <iframe width="400" height="100" frameBorder="0" scrolling="no" hspace="0"
                                 src="https://i.tianqi.com/?c=code&a=getcode&id=35&site=34&icon=1" title="tianqi"></iframe>*/}
-                        <span>晴</span>
+                        <span>{text}</span>
                     </div>
                 </div>
         </div>);
