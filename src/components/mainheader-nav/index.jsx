@@ -5,6 +5,7 @@ import memoryUtils from '../../utils/memoryUtils';
 import {reqWeather} from "../../api";
 //import {Breadcrumb} from "antd";
 //@author yekai 724456525@qq.com
+
 export default class Mainheadernav extends Component{
     state={
         currentTime:moment().format("YYYY-MM-DD hh:mm:ss"),
@@ -18,20 +19,22 @@ export default class Mainheadernav extends Component{
     }
     getWeather=async ()=>{
         const {text,code} = await reqWeather("台州");
-
-        this.setState({text:text,code:"../../assets/image/weather/"+code+"@1x.png"});
-
-
+       //var imgsrc= require("../../assets/image/weather/"+code+"@1x.png").default;
+        this.setState({text:text,code:require("../../assets/image/weather/"+code+"@1x.png").default});
+        //this.setState({text:text,code:require(imgsrc).default});
     }
     componentDidMount(): void {
         this.getTime();
         this.getWeather();
+       // this.addImage();
     }
 
     render() {
        // console.log(this.state.currentTime);
         const {currentTime,text,code} = this.state;
         const username =memoryUtils.user.UserName;
+
+
         //console.log(code);
         return (
             <div className="header">
@@ -59,3 +62,4 @@ export default class Mainheadernav extends Component{
         </div>);
     }
 }
+
