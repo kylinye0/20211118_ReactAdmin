@@ -11,7 +11,7 @@ import moment from 'moment';
 import storageUtils from "../../utils/storageUtils";
 const { TextArea } = Input;
 let history = createBrowserHistory();
- 
+
 // const formLayout = {
 //     labelCol: { span:6},
 //     wrapperCol: { span: 20}

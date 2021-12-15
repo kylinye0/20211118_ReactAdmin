@@ -123,8 +123,8 @@ export default class Query extends Component {
          const result = await reqRemoveItope(id);
          if (result.status===0)
          {
-             const dataSource = [this.state.itoperations];
-             this.setState({ itoperations: dataSource.filter(item => item.ID !== id) });
+             const dataSource = this.state.itoperations;
+             this.setState({ itoperations: dataSource.filter(item => item.ID!==id)});
              message.success(result.msg);
 
          }
@@ -204,15 +204,15 @@ export default class Query extends Component {
                         value: 'OA',
                     },
                 ],
-                onFilter: (value, record) => record.questionType.indexOf(value)===0,
+                onFilter: (value, record) => record.QuestionType.indexOf(value)===0,
                 /* onFilter: (value, record) => alert(value + record.questionType),*/
 
             },
             {
                 title: 'IT问题',
-                dataIndex: 'Questiontype',
+                dataIndex: 'Question',
                 key: 'question',
-                ...this.getColumnSearchProps('question'),
+                ...this.getColumnSearchProps('Question'),
                 /* filterDropdown:  ({ setSelectedkeys, selectedKeys, confirm, clearFilters }) => (
                 <div>
                  <Input />
@@ -228,7 +228,7 @@ export default class Query extends Component {
                 title: 'IT解决方案',
                 key: 'solve',
                 dataIndex: 'Solve',
-                ...this.getColumnSearchProps('solve'),
+                ...this.getColumnSearchProps('Solve'),
                 /*render: tags => (
                     <>
                         {tags.map(tag => {
@@ -263,7 +263,7 @@ export default class Query extends Component {
                         value: '凌松赞',
                     },
                 ],
-                onFilter: (value, record) => record.registrant.indexOf(value)===0,
+                onFilter: (value, record) => record.Registrant.indexOf(value)===0,
             },
             {
                 title: '登记时间',

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
-import {itopemenuList, menuList} from '../../config/menuConfig';
+import {itopemenuList} from '../../config/menuConfig';
 import { createBrowserHistory } from 'history';
 let history = createBrowserHistory();
 const { SubMenu } = Menu;
@@ -73,7 +73,7 @@ export default class Itopeleftnav extends Component {
     }
 
     UNSAFE_componentWillMount(): void {
-        this.menuNodes = this.getMenuNodes_map(menuList);
+        this.menuNodes = this.getMenuNodes_map(itopemenuList);
     }
     render() {
         const path = history.location.pathname;
