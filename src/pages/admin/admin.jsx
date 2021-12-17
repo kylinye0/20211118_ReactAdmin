@@ -39,8 +39,9 @@ export default class Admin extends Component {
             return (
                 //navkey={memoryUtils.leftnavkey }
                 <MainLayout children={<Home />}>
+
                     <Routes>
-                        <Route path='/home' element={<Home />} />
+                        <Route path='/home' element={<div><Home /></div>} />
                         <Route path='/role' element={<Role />} />
                         <Route path='/user' element={<User />} />
                         <Route path='/itoperation' element={<Itoperation />} />

@@ -3,11 +3,16 @@ import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
 import './index.less';
-import {menuList} from '../../config/menuConfig';
+import { menuList} from '../../config/menuConfig';
 import { createBrowserHistory } from 'history';
 let history = createBrowserHistory();
 const { SubMenu } = Menu;
 export default class Leftnav extends Component {
+    constructor (props) {
+        super(props);
+        this.handleMenu = this.handleMenu.bind(this);
+
+    }
     static displayName = Leftnav.name;
     getMenuNodes_map=(menuList)=>{
         return menuList.map(item=>{
@@ -73,6 +78,28 @@ export default class Leftnav extends Component {
             return pre;
         },[])
     }
+    handleMenu(e) {
+            //alert(e.key);
+            const path = e.key;
+             let title="";
+                menuList.forEach(item=>{
+                if(item.key===path)
+                {
+                    title = item.title;
+                }
+                else if(item.children){
+                    const cItem= item.children.find(cItem=>cItem.key===path);
+                    if(cItem){
+                        title=cItem.title;
+                    }
+                }
+            }
+
+        );
+            this.props.parent.getLeftNavMenuKey(this, title);
+
+    }
+
     //在第一次render()之前执行一次，同步
    /* componentWillMount(): void {
 
@@ -94,6 +121,7 @@ export default class Leftnav extends Component {
                     mode="inline"
                     theme="dark"
                     defaultSelectedKeys={[path]}
+                    onClick={this.handleMenu}
                     //selectedKeys={[path]}
                     //openKeys={[openkey]}
                 >

@@ -3,19 +3,26 @@ import './index.less';
 import moment from 'moment';
 import memoryUtils from '../../utils/memoryUtils';
 import {reqWeather} from "../../api";
+//import {menuList,itopemenuList} from '../../config/menuConfig';
 //import {Breadcrumb} from "antd";
 //@author yekai 724456525@qq.com
 
 export default class Mainheadernav extends Component{
-    state={
-        currentTime:moment().format("YYYY-MM-DD hh:mm:ss"),
-        text:"",
-        code:""
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            currentTime:moment().format("YYYY-MM-DD hh:mm"),
+            text:"",
+            code:"",
+            //title:""
+        };
     }
+
     getTime=()=>{
         setInterval(()=>{
-            this.setState({currentTime:moment().format("YYYY-MM-DD hh:mm:ss")})
-        },1000);
+            this.setState({currentTime:moment().format("YYYY-MM-DD hh:mm")})
+        },30000);
     }
     getWeather=async ()=>{
         const {text,code} = await reqWeather("台州");
@@ -23,18 +30,23 @@ export default class Mainheadernav extends Component{
         this.setState({text:text,code:require("../../assets/image/weather/"+code+"@1x.png").default});
         //this.setState({text:text,code:require(imgsrc).default});
     }
+
     componentDidMount(): void {
         this.getTime();
         this.getWeather();
+
        // this.addImage();
+    }
+    componentWillUnmount(): void {
+        clearTimeout();
     }
 
     render() {
        // console.log(this.state.currentTime);
+        //this.getTitle();
         const {currentTime,text,code} = this.state;
         const username =memoryUtils.user.UserName;
-
-
+        const title = this.props.children;
         //console.log(code);
         return (
             <div className="header">
@@ -48,7 +60,7 @@ export default class Mainheadernav extends Component{
                     <a href="javascripts:">退出</a>
                 </div>
                 <div className="header-bottom">
-                    <div className="header-bottom-left">首页</div>
+                    <div className="header-bottom-left">{title}</div>
                     <div className="header-bottom-right">
                         <span>{currentTime} </span>
                         <img src={code} alt="weather" ></img>
