@@ -4,6 +4,8 @@ import { Layout, Menu } from 'antd';
 import { HomeFilled ,NotificationOutlined} from '@ant-design/icons';
 import storageUtils from "../../utils/storageUtils";
 import memoryUtils from "../../utils/memoryUtils";
+import {createBrowserHistory} from "history";
+const history = createBrowserHistory();
 
 const { Header } = Layout;
 const {SubMenu} =Menu;
@@ -29,6 +31,8 @@ export default class Headernav extends Component {
         if(e.key==='9')
         {
             storageUtils.removeUser();
+            history.replace('/login');
+            history.go();
             //memoryUtils.user ={};
 
         }else {
@@ -50,7 +54,7 @@ export default class Headernav extends Component {
                     <Menu.Item key="3" ><Link to="/fetch-data">FetchData</Link></Menu.Item>
 
                     <SubMenu key="sub1" icon={<NotificationOutlined />} title={memoryUtils.user.UserName} style={{position:'absolute',right:'100px'}}>
-                        <Menu.Item key="9"><Link to="/login">退出</Link></Menu.Item>
+                        <Menu.Item key="9">退出</Menu.Item>
                         <Menu.Item key="10">option10</Menu.Item>
                         <Menu.Item key="11">option11</Menu.Item>
                         <Menu.Item key="12">option12</Menu.Item>

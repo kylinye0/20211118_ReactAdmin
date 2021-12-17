@@ -3,6 +3,12 @@ import './index.less';
 import moment from 'moment';
 import memoryUtils from '../../utils/memoryUtils';
 import {reqWeather} from "../../api";
+import storageUtils from "../../utils/storageUtils";
+import {Modal,Button} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import {createBrowserHistory} from "history";
+const history = createBrowserHistory();
+
 //import {menuList,itopemenuList} from '../../config/menuConfig';
 //import {Breadcrumb} from "antd";
 //@author yekai 724456525@qq.com
@@ -20,7 +26,7 @@ export default class Mainheadernav extends Component{
     }
 
     getTime=()=>{
-        setInterval(()=>{
+      this.Interval=  setInterval(()=>{
             this.setState({currentTime:moment().format("YYYY-MM-DD hh:mm")})
         },30000);
     }
@@ -30,6 +36,26 @@ export default class Mainheadernav extends Component{
         this.setState({text:text,code:require("../../assets/image/weather/"+code+"@1x.png").default});
         //this.setState({text:text,code:require(imgsrc).default});
     }
+    Logout=()=>{
+        Modal.confirm(
+            {
+               // title: '你确定退出登录吗?',
+                okText:"确定",
+                cancelText:"取消",
+                icon: <ExclamationCircleOutlined />,
+                content: '你确定退出登录吗?',
+                onOk:()=> {
+                    storageUtils.removeUser();
+                    history.replace('/login');
+                    history.go();
+                },
+               /* onCancel() {
+                    //console.log('Cancel');
+                },*/
+            }
+        );
+
+    }
 
     componentDidMount(): void {
         this.getTime();
@@ -38,7 +64,7 @@ export default class Mainheadernav extends Component{
        // this.addImage();
     }
     componentWillUnmount(): void {
-        clearTimeout();
+        clearTimeout(this.Interval);
     }
 
     render() {
@@ -57,7 +83,7 @@ export default class Mainheadernav extends Component{
 
                     </Breadcrumb>*/}
                     <span>欢迎，{username}</span>
-                    <a href="javascripts:">退出</a>
+                    <Button type="link" onClick={this.Logout}>退出</Button>
                 </div>
                 <div className="header-bottom">
                     <div className="header-bottom-left">{title}</div>
