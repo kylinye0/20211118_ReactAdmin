@@ -134,7 +134,8 @@ export default class Query extends Component {
          }
 
     }
-    renderitoperationsTable(itoperations) {
+    renderitoperationsTable() {
+         const {itoperations}=this.state;
         const columns = [
             {
                 title: '序号',
@@ -299,7 +300,7 @@ export default class Query extends Component {
 
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : this.renderitoperationsTable(this.state.itoperations);
+            : this.renderitoperationsTable();
 
 
         return (

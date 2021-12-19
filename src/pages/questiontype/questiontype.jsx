@@ -18,8 +18,7 @@ export default class Questiontype extends Component{
         const questionType=await reqAddQuestionType();
         this.setState({questiontypes:questionType,loading:false});
     }
-    renderquestiontypesTable(questiontypes){
-        const dataSource =questiontypes ;
+    renderquestiontypesTable(datasource){
        // alert(JSON.parse(dataSource));
        //  const dataSource = [
        //      {
@@ -60,7 +59,7 @@ export default class Questiontype extends Component{
         return (<div><Card title={title} extra={extra} >
             <Table
                 bordered
-                dataSource={dataSource} columns={columns} rowkey="ID"/>
+                dataSource={datasource} columns={columns} rowkey="ID"/>
         </Card></div>);
     }
     handleRemoveQuesType=async(id)=> {
