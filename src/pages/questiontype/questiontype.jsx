@@ -59,6 +59,7 @@ export default class Questiontype extends Component{
         return (<div><Card title={title} extra={extra} >
             <Table
                 bordered
+                pagination={{defaultPageSize:5,showQuickJumper:true}}
                 dataSource={datasource} columns={columns} rowkey="ID"/>
         </Card></div>);
     }

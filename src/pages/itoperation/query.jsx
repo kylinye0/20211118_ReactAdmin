@@ -290,7 +290,12 @@ export default class Query extends Component {
 
         return (
             <div>
-            <Table columns={columns} dataSource={itoperations} rowkey={record=>record.ID}></Table>
+            <Table
+                columns={columns}
+                dataSource={itoperations}
+                rowkey={record=>record.ID}
+                pagination={{defaultPageSize:10,showQuickJumper:true}}
+            ></Table>
             </div>
         );
     }
