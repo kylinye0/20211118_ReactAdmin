@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import {Card, Table, Button, message} from 'antd';
+import {Card, Table,Modal, Button, message} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
-import {reqAddQuestionType, reqRemoveQuestionType} from "../../api/index";
-
+import {reqQuestionType,reqAddQuestionType, reqRemoveQuestionType} from "../../api/index";
+import AddForm from './add-form';
+import UpdateForm from './update-form';
 //@author yekai 724456525@qq.com
 export default class Questiontype extends Component{
     constructor(props)
@@ -11,14 +12,72 @@ export default class Questiontype extends Component{
         this.state={
             questiontypes:[],
             loading: true,
+            visible: false,
+            showStatus:0,
     }
     }
+    handleAddQuestionType =async ()=>{
+        this.setState({
+            showStatus: 0,
+        });
+        const result = await reqAddQuestionType(this.questiontype.ID);
+        if (result.status===0) {
+            message.success(result.msg);
+            this.populateQuestionTypeData();
+        }else {
+            message.success(result.msg);
+        }
+
+
+    }
+
+    handleUpdateQuestionType =()=>{
+        this.setState({
+            showStatus: 0,
+        });
+    }
+    handleRemoveQuesType=async(id)=> {
+        const result = await reqRemoveQuestionType(id);
+        if (result.status===0)
+        {
+            const dataSource = this.state.questiontypes;
+            this.setState({ questiontypes: dataSource.filter(item => item.ID!==id)});
+            message.success(result.msg);
+
+        }
+        else
+        {
+            message.error(result.msg);
+        }
+
+    }
+    showAdd = () => {
+        this.setState({
+            showStatus: 1,
+        });
+    };
+    showUpdate= (questiontype) => {
+        this.questiontype = questiontype;
+        this.setState({
+            showStatus: 2,
+        });
+    };
+
+    handleCancel = () => {
+        this.setState({
+            showStatus: 0,
+        });
+    };
     async populateQuestionTypeData()
     {
-        const questionType=await reqAddQuestionType();
+        const questionType=await reqQuestionType();
         this.setState({questiontypes:questionType,loading:false});
     }
-    renderquestiontypesTable(datasource){
+
+
+
+    renderquestiontypesTable(){
+
        // alert(JSON.parse(dataSource));
        //  const dataSource = [
        //      {
@@ -28,7 +87,8 @@ export default class Questiontype extends Component{
        //      },
        //
        //  ];
-
+        const {datasource,showStatus}=this.state;
+        const questiontype=this.questiontype || {};
         const columns = [
             {
                 title: '序号',
@@ -49,50 +109,55 @@ export default class Questiontype extends Component{
                 title: '操作',
                 key:'action',
                 render:(record)=>(<span>
-                    <Button type="link">修改分类</Button>
+                    <Button type="link" onClick={()=>this.showUpdate(record)}>修改分类</Button>
                     <Button type="link" onClick={()=>this.handleRemoveQuesType(record.ID)}>删除分类</Button>
                 </span>)
             },
         ];
         const title ="问题类型列表";
-        const extra = (<Button type="primary"><PlusOutlined />添加</Button>);
+        const extra = (<Button type="primary" onClick={this.showAdd}><PlusOutlined />添加</Button>);
         return (<div><Card title={title} extra={extra} >
             <Table
                 bordered
                 pagination={{defaultPageSize:5,showQuickJumper:true}}
                 dataSource={datasource} columns={columns} rowkey="ID"/>
+            <Modal
+                title="添加分类"
+                visible={showStatus===1}
+                onOk={this.handleAddQuestionType}
+                onCancel={this.handleCancel}
+                okText="确认"
+                cancelText="取消"
+            >
+                <AddForm />
+            </Modal>
+            <Modal
+                title="更新分类"
+                visible={showStatus===2}
+                onOk={this.handleUpdateQuestionType}
+                onCancel={this.handleCancel}
+                okText="确认"
+                cancelText="取消"
+            >
+                <UpdateForm questiontypeName={questiontype.TypeName}></UpdateForm>
+            </Modal>
+
         </Card></div>);
     }
-    handleRemoveQuesType=async(id)=> {
-        const result = await reqRemoveQuestionType(id);
-        if (result.status===0)
-        {
-            const dataSource = this.state.questiontypes;
-            this.setState({ questiontypes: dataSource.filter(item => item.ID!==id)});
-            message.success(result.msg);
 
-        }
-        else
-        {
-            message.error(result.msg);
-        }
-
-    }
     UNSAFE_componentWillMount(): void {
         this.populateQuestionTypeData();
     }
 
+
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : this.renderquestiontypesTable(this.state.questiontypes);
+            : this.renderquestiontypesTable();
 
 
         return (
             <div>
-                <div>{}</div>
-                <h1 id="tabelLabel" >IT知识库列表</h1>
-                <p>筛选排序都在标题里</p>
                 {contents}
             </div>
         );

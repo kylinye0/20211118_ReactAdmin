@@ -64,7 +64,7 @@ export default class Login extends Component{
                     initialValues={{username:'admin'}}
                 >
                     <Form.Item
-                        name="username"
+                        //name="username"
                         rules={[{ required: true, message: '用户名必须输入!' },
                             {min:4,message:'最少4个字符!'},
                             {max:12,message:'最多12个字符!'},

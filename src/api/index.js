@@ -16,7 +16,8 @@ export const reqAddUser = (user)=>ajax(BASE+'/manage/user/add',user,'POST');
 export const reqItoperation =(id)=>ajax(BASE+'/ItOperations',{"id":id},'GET');
 export const reqAddItope = (itoperation)=>ajax(BASE+'/ItOperations',itoperation,'POST');
 export const reqRemoveItope = (id)=>ajax(BASE+'/ItOperations/'+id,{"id":id},'DELETE');
-export const reqAddQuestionType = (id)=>ajax(BASE+'/QuestionTypes/',{"id":id},"GET");
+export const reqQuestionType = (id)=>ajax(BASE+'/QuestionTypes/',{"id":id},"GET");
+export const reqAddQuestionType = (QuestionType)=>ajax(BASE+'/QuestionTypes/',{"QuestionType":QuestionType},"GET");
 export const reqRemoveQuestionType = (id)=>ajax(BASE+'/QuestionTypes/',{"id":id},"DELETE");
 export  const reqWeather=(location)=>{
     return new Promise((resolve,reject)=>{
