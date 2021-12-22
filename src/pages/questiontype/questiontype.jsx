@@ -4,8 +4,11 @@ import {PlusOutlined} from '@ant-design/icons';
 import {reqQuestionType,reqAddQuestionType, reqRemoveQuestionType} from "../../api/index";
 import AddForm from './add-form';
 import UpdateForm from './update-form';
+//import { FormInstance } from 'antd/es/form';
 //@author yekai 724456525@qq.com
 export default class Questiontype extends Component{
+    formRef = React.createRef();
+
     constructor(props)
     {
         super(props);
@@ -20,7 +23,13 @@ export default class Questiontype extends Component{
         this.setState({
             showStatus: 0,
         });
-        const result = await reqAddQuestionType(this.questiontype.ID);
+        //const questionType=this.formRef.current.setFieldsValues
+
+
+        //const questionType= this.form.getfield;
+        //const questionType= this.form.getColumnSearchProps("questionType");
+        //alert(questionType);
+        const result = await reqAddQuestionType();
         if (result.status===0) {
             message.success(result.msg);
             this.populateQuestionTypeData();
@@ -128,8 +137,9 @@ export default class Questiontype extends Component{
                 onCancel={this.handleCancel}
                 okText="确认"
                 cancelText="取消"
+                destroyOnClose={true}
             >
-                <AddForm />
+                <AddForm ref={this.formRef} preserve={false}/>
             </Modal>
             <Modal
                 title="更新分类"
